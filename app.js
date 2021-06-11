@@ -29,10 +29,13 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect(process.env.CONNECTION_ID, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(
+  "mongodb+srv://admin-shaurya:Test123@secret.qcrq1.mongodb.net/secretsDB?retryWrites=true&w=majority",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
+);
 mongoose.set("useCreateIndex", true);
 
 const userSchema = new mongoose.Schema({
