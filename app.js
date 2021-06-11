@@ -29,7 +29,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("mongodb://localhost:27017/test", {
+mongoose.connect(process.env.CONNECTION_ID, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
