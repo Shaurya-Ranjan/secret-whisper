@@ -62,22 +62,22 @@ passport.deserializeUser(function (id, done) {
   });
 });
 
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: process.env.CLIENT_ID,
-      clientSecret: process.env.CLIENT_SECRET,
-      callbackURL: "http://localhost:3000/auth/google/secrets",
-      userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo ",
-    },
-    function (accessToken, refreshToken, profile, cb) {
-      console.log(profile);
-      User.findOrCreate({ username: profile.id }, function (err, user) {
-        return cb(err, user);
-      });
-    }
-  )
-);
+// passport.use(
+//   new GoogleStrategy(
+//     {
+//       clientID: process.env.CLIENT_ID,
+//       clientSecret: process.env.CLIENT_SECRET,
+//       callbackURL: "http://localhost:3000/auth/google/secrets",
+//       userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo ",
+//     },
+//     function (accessToken, refreshToken, profile, cb) {
+//       console.log(profile);
+//       User.findOrCreate({ username: profile.id }, function (err, user) {
+//         return cb(err, user);
+//       });
+//     }
+//   )
+// );
 
 app.get("/", (req, res) => {
   res.render("home");
@@ -87,14 +87,14 @@ app.get(
   passport.authenticate("google", { scope: ["profile"] })
 );
 
-app.get(
-  "/auth/google/secrets",
-  passport.authenticate("google", { failureRedirect: "/login" }),
-  function (req, res) {
-    // Successful authentication, redirect secrets.
-    res.redirect("/secrets");
-  }
-);
+// app.get(
+//   "/auth/google/secrets",
+//   passport.authenticate("google", { failureRedirect: "/login" }),
+//   function (req, res) {
+//     // Successful authentication, redirect secrets.
+//     res.redirect("/secrets");
+//   }
+// );
 
 app.get("/login", (req, res) => {
   res.render("login");
